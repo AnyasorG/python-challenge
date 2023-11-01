@@ -10,12 +10,15 @@ total_profit_losses = 0
 profit_loss_changes = []
 dates = []
 
+# Store the header row
+header = []
+
 # Open and read the CSV file
 with open(csvpath, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
 
-    # Skip the header row
-    next(csvreader)
+    # Store the header row
+    header = next(csvreader)
 
     previous_profit_loss = None
 
@@ -42,7 +45,7 @@ greatest_increase_date = dates[profit_loss_changes.index(greatest_increase) + 1]
 greatest_decrease = min(profit_loss_changes)
 greatest_decrease_date = dates[profit_loss_changes.index(greatest_decrease) + 1]
 
-# Print the results
+# Print the results without the header row
 print("Financial Analysis")
 print("----------------------------")
 print(f"Total Months: {total_months}")
@@ -51,14 +54,14 @@ print(f"Average Change: ${round(average_change, 2)}")
 print(f"Greatest Increase in Profits: {greatest_increase_date} (${greatest_increase})")
 print(f"Greatest Decrease in Profits: {greatest_decrease_date} (${greatest_decrease})")
 
-# Export the results to a text file
+# Export the results to a text file, excluding the header row
 output_path = os.path.join("..", "anyas", "Desktop", "python-challenge", "PyBank", "analysis","financial_analysis.txt")
 with open(output_path, "w") as text_file:
     text_file.write("Financial Analysis\n")
     text_file.write("----------------------------\n")
     text_file.write(f"Total Months: {total_months}\n")
     text_file.write(f"Net Total Amount of Profit/Losses: ${total_profit_losses}\n")
-    text_file.write(f"Average Change: ${round(average_change, 2)}\n")  # Use round to format average_change
+    text_file.write(f"Average Change: ${round(average_change, 2)}\n")
     text_file.write(f"Greatest Increase in Profits: {greatest_increase_date} (${greatest_increase})\n")
     text_file.write(f"Greatest Decrease in Profits: {greatest_decrease_date} (${greatest_decrease})\n")
 
