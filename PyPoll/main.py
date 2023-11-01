@@ -10,12 +10,15 @@ candidates = {}
 winner = ""
 winner_votes = 0
 
+# Store the header row
+header = []
+
 # Read the CSV file using csv.reader with delimiter
 with open(csvpath, "r") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
 
-    # Skip the header row
-    next(csvreader)
+    # Store the header row
+    header = next(csvreader)
 
     for row in csvreader:
         total_votes = total_votes + 1  # Increment total_votes
@@ -29,14 +32,13 @@ with open(csvpath, "r") as csvfile:
 # Find the winner and calculate the percentages
 for candidate, votes in candidates.items():
     percentage = (votes / total_votes) * 100
-    print(candidate + ": " + str(round(percentage, 3)) + "% (" + str(votes) + " votes)")
 
     if votes > winner_votes:
         winner_votes = votes
         winner = candidate
 
-# Print the analysis results
-print("\nElection Results")
+# Print the analysis results without the stage output for individual candidates
+print("Election Results")
 print("-------------------------")
 print("Total Votes: " + str(total_votes))
 print("-------------------------")
@@ -52,7 +54,7 @@ output_path = os.path.join("..", "anyas", "Desktop", "python-challenge", "PyPoll
 
 # Create and open a text file for writing the analysis results at the specified output path
 with open(output_path, "w") as textfile:
-    # Write the analysis results to the text file
+    # Write the analysis results to the text file, excluding the stage output for individual candidates
     textfile.write("Election Results\n")
     textfile.write("-------------------------\n")
     textfile.write("Total Votes: " + str(total_votes) + "\n")
