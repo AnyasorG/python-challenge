@@ -47,7 +47,7 @@ The results are saved in a text file named "financial_analysis.txt" in the "anal
 - Python - Official Python website.
 - CSV Module Documentation - Python documentation on working with CSV files.
 
-Author
+# Author
 
 Godswill Anyasor
 
