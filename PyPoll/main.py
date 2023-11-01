@@ -16,7 +16,7 @@ header = []
 # Read the CSV file using csv.reader with delimiter
 with open(csvpath, "r") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
-
+    
     # Store the header row
     header = next(csvreader)
 
@@ -31,22 +31,20 @@ with open(csvpath, "r") as csvfile:
 
 # Find the winner and calculate the percentages
 for candidate, votes in candidates.items():
-    percentage = (votes / total_votes) * 100
-
     if votes > winner_votes:
         winner_votes = votes
         winner = candidate
 
-# Print the analysis results without the stage output for individual candidates
-print("Election Results")
+# Print the analysis results with the requested format
+print("\nElection Results")
 print("-------------------------")
-print("Total Votes: " + str(total_votes))
+print("Total Votes:", total_votes)
 print("-------------------------")
 for candidate, votes in candidates.items():
     percentage = (votes / total_votes) * 100
-    print(candidate + ": " + str(round(percentage, 3)) + "% (" + str(votes) + " votes)")
+    print(f"{candidate}: {round(percentage, 3)}% ({votes})")
 print("-------------------------")
-print("Winner: " + winner)
+print(f"Winner: {winner}")
 print("-------------------------")
 
 # Specify the output path
@@ -54,17 +52,17 @@ output_path = os.path.join("..", "anyas", "Desktop", "python-challenge", "PyPoll
 
 # Create and open a text file for writing the analysis results at the specified output path
 with open(output_path, "w") as textfile:
-    # Write the analysis results to the text file, excluding the stage output for individual candidates
+    # Write the analysis results to the text file with the requested format
     textfile.write("Election Results\n")
     textfile.write("-------------------------\n")
-    textfile.write("Total Votes: " + str(total_votes) + "\n")
+    textfile.write(f"Total Votes: {total_votes}\n")
     textfile.write("-------------------------\n")
     for candidate, votes in candidates.items():
         percentage = (votes / total_votes) * 100
-        textfile.write(candidate + ": " + str(round(percentage, 3)) + "% (" + str(votes) + " votes)\n")
+        textfile.write(f"{candidate}: {round(percentage, 3)}% ({votes})\n")
     
     textfile.write("-------------------------\n")
-    textfile.write("Winner: " + winner + "\n")
+    textfile.write(f"Winner: {winner}\n")
     textfile.write("-------------------------\n")
 
 # Print a message indicating that the results have been exported to the specified output path
