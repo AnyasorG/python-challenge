@@ -1,8 +1,11 @@
 import os
 import csv
 
-# Define the relative file path using os.path.join
-csvpath = os.path.join("..", "anyas", "Desktop", "python-challenge", "PyPoll", "Resources", "election_data.csv")
+# Locate current directory of main.py script
+script_directory = os.path.dirname(os.path.abspath(__file__))
+
+# Define the relative file path for the CSV file
+csvpath = os.path.join(script_directory, "Resources", "election_data.csv")
 
 # Initialize variables
 total_votes = 0
@@ -48,7 +51,7 @@ print(f"Winner: {winner}")
 print("-------------------------")
 
 # Specify the output path
-output_path = os.path.join("..", "anyas", "Desktop", "python-challenge", "PyPoll", "analysis", "election_results.txt")
+output_path = os.path.join(script_directory, "analysis", "election_results.txt")
 
 # Create and open a text file for writing the analysis results at the specified output path
 with open(output_path, "w") as textfile:

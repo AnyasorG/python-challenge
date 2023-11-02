@@ -1,8 +1,11 @@
 import os
 import csv
 
-# Define the relative file path using os.path.join
-csvpath = os.path.join("..", "anyas", "Desktop", "python-challenge", "PyBank", "Resources", "budget_data.csv")
+# Get the current directory of your Python script
+script_directory = os.path.dirname(os.path.abspath(__file__))
+
+# Define the relative file path for the CSV file
+csvpath = os.path.join(script_directory, "Resources", "budget_data.csv")
 
 # Initialize variables
 total_months = 0
@@ -54,13 +57,15 @@ print(f"Average Change: ${round(average_change, 2)}")
 print(f"Greatest Increase in Profits: {greatest_increase_date} (${greatest_increase})")
 print(f"Greatest Decrease in Profits: {greatest_decrease_date} (${greatest_decrease})")
 
+# Specify the output path
+output_path = os.path.join(script_directory, "analysis", "financial_analysis.txt")
+
 # Export the results to a text file, excluding the header row
-output_path = os.path.join("..", "anyas", "Desktop", "python-challenge", "PyBank", "analysis","financial_analysis.txt")
 with open(output_path, "w") as text_file:
     text_file.write("Financial Analysis\n")
     text_file.write("----------------------------\n")
     text_file.write(f"Total Months: {total_months}\n")
-    text_file.write(f"Net Total Amount of Profit/Losses: ${total_profit_losses}\n")
+    text_file.write(f"Total: ${total_profit_losses}\n")
     text_file.write(f"Average Change: ${round(average_change, 2)}\n")
     text_file.write(f"Greatest Increase in Profits: {greatest_increase_date} (${greatest_increase})\n")
     text_file.write(f"Greatest Decrease in Profits: {greatest_decrease_date} (${greatest_decrease})\n")
